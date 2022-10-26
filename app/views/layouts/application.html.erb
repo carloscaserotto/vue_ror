@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IntegrarVuejs26Rubyonrails6</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'hello_vue' %>
+    <title>Vue.js https://v2.vuejs.org/v2/guide/</title>
+  </head>
+
+  <body>
+  <div id="app">
+        <!--Computed Properties-->
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed reversed message: "{{ reversedMessage }}"</p>
+        <p>Computed Date message: "{{ now }}"</p>
+        <!--Computed Setter-->
+        {{fullName}}
+        
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>    
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data:{
+                message:"Hola Mundo!",
+                firstName: 'Foo',
+                lastName: 'Bar',
+            },
+            methods:{
+                doSomething: function(){
+                    alert("HOLA")
+                }
+            },
+            computed:{
+                reversedMessage: function () {
+                // `this` points to the vm instance
+                return this.message.split('').reverse().join('')
+                },
+                now: function(){
+                    return Date.now()
+                },
+                fullName: {
+                    // getter
+                    get: function () {
+                    return this.firstName + ' ' + this.lastName
+                    },
+                    // setter
+                    set: function (newValue) {
+                    var names = newValue.split(' ')
+                    this.firstName = names[0]
+                    this.lastName = names[names.length - 1]
+                    }
+                }
+            }
+        })
+
+    </script>
+    <%= yield %>
+  </body>
+</html>
